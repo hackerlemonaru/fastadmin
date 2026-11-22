@@ -84,3 +84,26 @@ jobs:
         with:
           python-version: "3.13"
       - name: Build the wheel
+        run: uv build
+      - name: Install from the wheel and import
+        run: |
+          uv venv /tmp/venv-extras
+          uv pip install --python /tmp/venv-extras "$(ls dist/*.whl)[${{ matrix.extras }}]"
+          /tmp/venv-extras/bin/python -c "import fastadmin; print('ok: ${{ matrix.extras }}')"
+
+  frontend:
+    name: Frontend (lint + tests + build)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: "yarn"
+          cache-dependency-path: "frontend/yarn.lock"
+      - name: Install dependencies
+        run: make -C frontend install
+      - name: Lint
+        run: make -C frontend lint
+      - name: Tests
+        run: make -C frontend test
