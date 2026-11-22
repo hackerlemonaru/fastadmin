@@ -56,3 +56,31 @@ jobs:
         if: matrix.python-version == '3.13'
         uses: codecov/codecov-action@v5
         with:
+          use_oidc: true
+          files: ./coverage.xml
+          flags: backend
+          fail_ci_if_error: true
+
+  install-matrix:
+    # Every documented `pip install fastadmin[...]` combination must install
+    # and import on its own (no dev deps, no other extras).
+    name: Install (${{ matrix.extras }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        extras:
+          - "fastapi,django"
+          - "fastapi,tortoise-orm"
+          - "fastapi,pony"
+          - "fastapi,sqlalchemy"
+          - "fastapi,yara-orm"
+          - "django"
+          - "django,pony"
+          - "flask,sqlalchemy"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.13"
+      - name: Build the wheel
