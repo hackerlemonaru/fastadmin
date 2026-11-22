@@ -35,3 +35,25 @@ jobs:
           python-version: "3.13"
       - name: Install Cairo/Pango (social cards)
         run: |
+          sudo apt-get update
+          sudo apt-get install -y libcairo2-dev libfreetype6-dev libffi-dev \
+            libjpeg-dev libpng-dev libz-dev pngquant
+      - name: Build with MkDocs
+        # The `docs` dependency group from pyproject.toml is the single source
+        # of truth; CI=true (set by Actions) enables the social cards plugin.
+        run: uv run --only-group docs mkdocs build --strict
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
