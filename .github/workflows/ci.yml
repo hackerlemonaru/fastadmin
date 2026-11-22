@@ -107,3 +107,12 @@ jobs:
         run: make -C frontend lint
       - name: Tests
         run: make -C frontend test
+      - name: Build
+        run: make -C frontend build
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          use_oidc: true
+          files: ./frontend/coverage/lcov.info
+          flags: frontend
+          fail_ci_if_error: true
