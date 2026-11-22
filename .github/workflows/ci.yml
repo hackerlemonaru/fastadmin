@@ -18,3 +18,41 @@ jobs:
   lint:
     name: Lint (ruff + ty)
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        run: uv sync --all-extras
+      - name: ruff check
+        run: uv run ruff check fastadmin tests examples
+      - name: ruff format --check
+        run: uv run ruff format --check fastadmin tests examples
+      - name: ty
+        run: uv run ty check fastadmin
+
+  test:
+    name: Tests (py${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13"]
+    env:
+      ADMIN_USER_MODEL: User
+      ADMIN_USER_MODEL_USERNAME_FIELD: username
+      ADMIN_SECRET_KEY: secret_key
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: uv sync --all-extras
+      - name: Run tests with 100% coverage gate
+        run: uv run pytest -n auto --cov=fastadmin --cov-report=term-missing --cov-report=xml tests
+      - name: Upload coverage to Codecov
+        if: matrix.python-version == '3.13'
+        uses: codecov/codecov-action@v5
+        with:
