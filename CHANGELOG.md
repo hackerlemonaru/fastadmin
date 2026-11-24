@@ -67,3 +67,19 @@ All notable changes to FastAdmin are documented in this file.
   transparent table headers. The rich-text editor accent follows
   `primary_color` instead of a hardcoded teal.
 - **Dependencies**: antd 6.5.1, i18next 26, react-i18next 17, vite 8, jsdom 29,
+  TypeScript 6.0, vitest 4.1.10, eslint 10.7; `quill-delta` added to satisfy a
+  peer dependency and `baseUrl` removed from `tsconfig.json` (deprecated in
+  TypeScript 6).
+
+## 0.8.3
+
+Correctness and security fixes from a full-codebase review. The only public API
+addition is the backward-compatible `has_action_permission` model-admin hook.
+
+### Security
+
+- **Actions**: the `action` endpoint now enforces permissions server-side via a
+  new `has_action_permission` hook (defaults to `has_change_permission`), so a
+  read-only admin can no longer run a registered bulk action. Override the hook
+  to allow a read-only user to run a specific non-mutating action.
+- **Passwords**: editing a user with an empty password field no longer
