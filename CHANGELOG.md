@@ -123,3 +123,28 @@ Bug-fix follow-up to the 0.8.1 audit. No public API changes.
   plain columns whose name merely ends with `_id`, and list-view search now
   runs as a single OR'd WHERE clause instead of materializing every matching
   row once per search field.
+- **Flask**: `HTTPException`s with an attached response (`abort(Response(...))`)
+  are passed through unchanged, error headers (`Allow`, `WWW-Authenticate`,
+  `Retry-After`, ...) are preserved on JSON error responses, and unhandled
+  errors are logged with their traceback.
+- **Filtering**: `IS NULL` is expressible again on text columns via
+  `field__exact=null` (substring lookups keep the literal string `"null"`).
+- **Frontend**: stop corrupting text fields whose content is the literal word
+  `"true"`/`"false"` on the change form (booleans are now only coerced for
+  boolean widgets), stop shape-based date detection for fields known to have
+  no date widget, and pass the model configuration directly to
+  `transformDataFromServer` so every call site gets the safe behavior.
+
+## 0.8.1
+
+Bug-fix release from a full-source audit of `main`. No public API changes.
+
+- **Pony ORM**: fix list-view search crashing (HTTP 500) for models whose
+  primary key is not named `id`, and fix multi-field ordering with mixed
+  ascending/descending fields silently sorting by the wrong priority.
+- **SQLAlchemy**: filtering a list by a many-to-many (or other relationship)
+  field no longer raises an unhandled 500; it now matches on the related row's
+  primary key.
+- **Flask**: unhandled server errors now return a proper HTTP 500 with a generic
+  message (previously sent as HTTP 200 and leaked the exception text), and API
+  errors are returned as JSON `{"detail": ...}` matching the Django/FastAPI
