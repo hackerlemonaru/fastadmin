@@ -102,3 +102,24 @@ addition is the backward-compatible `has_action_permission` model-admin hook.
   `required`. Tortoise enum options now emit the scalar value, and Django choice
   options no longer swap the stored value with the human-readable label.
 - **Serialization**: a field listed in both `exclude` and `list_display` now
+  stays excluded from API responses.
+- **Validation**: malformed date/datetime values, empty-condition filters
+  (`field__`), unsupported or null export formats, and malformed request bodies
+  on the Django integration now return HTTP 422 instead of an unhandled 500.
+- **Settings**: `ADMIN_QUERY_MAX_LIMIT` and `ADMIN_SESSION_EXPIRED_AT` fall back
+  to their defaults on a blank or non-numeric value instead of crashing the
+  package at import.
+
+## 0.8.2
+
+Bug-fix follow-up to the 0.8.1 audit. No public API changes.
+
+- **SQLAlchemy**: relationship (m2m) filter values are coerced to `int` for
+  integer primary keys (previously raised HTTP 500 on strictly typed drivers
+  such as PostgreSQL/asyncpg), and unsupported lookups on relation fields
+  (e.g. `icontains`) are rejected with HTTP 422 instead of silently matching
+  by primary-key equality.
+- **Pony ORM**: the foreign-key filter rewrite no longer corrupts filters on
+  plain columns whose name merely ends with `_id`, and list-view search now
+  runs as a single OR'd WHERE clause instead of materializing every matching
+  row once per search field.
