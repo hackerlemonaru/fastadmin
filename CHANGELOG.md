@@ -51,3 +51,19 @@ All notable changes to FastAdmin are documented in this file.
 ### Features
 
 - **Column labels**: new `list_display_labels` ModelAdmin attribute
+  (`{"field": "Header"}`) overrides or translates auto-generated list-page
+  column titles. Sorting, filtering and data binding stay keyed by the field
+  name.
+- **Actions without selection**: `@action(requires_selection=False)` enables
+  the Apply button without selecting rows; the action receives an empty `ids`
+  list and should treat it as "all objects".
+
+### Frontend
+
+- **Apple-like design refresh**: frosted-glass sticky header with hairline
+  borders (the configured `primary_color` now serves as the accent instead of
+  the header background), larger continuous corner radii, softer diffuse
+  shadows, `#f5f5f7`/`#161617` layout backgrounds, tighter letter spacing and
+  transparent table headers. The rich-text editor accent follows
+  `primary_color` instead of a hardcoded teal.
+- **Dependencies**: antd 6.5.1, i18next 26, react-i18next 17, vite 8, jsdom 29,
