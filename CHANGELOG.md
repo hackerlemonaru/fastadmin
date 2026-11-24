@@ -148,3 +148,38 @@ Bug-fix release from a full-source audit of `main`. No public API changes.
 - **Flask**: unhandled server errors now return a proper HTTP 500 with a generic
   message (previously sent as HTTP 200 and leaked the exception text), and API
   errors are returned as JSON `{"detail": ...}` matching the Django/FastAPI
+  integrations instead of HTML error pages.
+- **Filtering**: the literal strings `"true"`, `"false"`, and `"null"` are no
+  longer coerced to `bool`/`None` on text fields, so a text column can be
+  filtered for those exact values.
+- **Frontend**: fix a form-save crash when a JSON field value is an object with a
+  `date` key; stop corrupting text fields whose content looks like a date/time;
+  render stored `CheckboxGroup` selections correctly; surface errors from
+  dashboard action run/refresh; and use the react-query v5 `invalidateQueries`
+  signature to avoid over-invalidating unrelated queries.
+- Correct the `sortable_by` docstring to match actual behavior.
+
+## 0.8.0
+
+- Add a `register_encoder(type_, encoder)` hook to control how a type is
+  serialized in every admin API response (e.g. a custom datetime format, an
+  `Enum`'s label, or a domain value object). Custom encoders take precedence over
+  the built-in `datetime`/`UUID`/`Decimal` handling (#136).
+
+## 0.7.0
+
+- Add support for [Yara ORM](https://github.com/vsdudakov/yara-orm) — a fast,
+  async Python ORM with a Rust engine. New `YaraOrmModelAdmin` /
+  `YaraOrmInlineModelAdmin` admin classes and a `fastadmin[yara-orm]` extra, with
+  a runnable FastAPI example (`examples/fastapi_yaraorm`).
+- Add a refresh button to the widget action results (toolbar and expand modal)
+  so results can be re-run in place without losing scroll position (#132).
+
+## 0.6.0
+
+Security hardening release. No changes to the documented public API, but
+several defaults are now stricter — review the notes below before upgrading.
+
+- **Server-side permission enforcement**: `add`/`change`/`delete`/`export` now
+  enforce the matching `has_*_permission` hook (previously UI-only), and
+  `change_password` requires `has_change_permission` to change another user's
