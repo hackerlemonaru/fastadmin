@@ -222,3 +222,18 @@ and set `list_filter`/`fields` where you relied on filtering arbitrary columns.
 
 - Add `obj` parameter to `upload_file` method.
 - Add `get_file_url` method to model admin.
+
+## 0.4.8
+
+- Add toolbar actions to widget action results.
+- Add table view to widget action results.
+- Add JSON view to widget action results.
+- Enhance documentation for the `upload_file` method.
+- Add `str` type for pk.
+
+## 0.4.7
+
+- Add `sub_tab` to widget action props.
+- Dark mode support.
+
+## 0.4.6
