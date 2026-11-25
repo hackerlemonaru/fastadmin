@@ -237,3 +237,36 @@ and set `list_filter`/`fields` where you relied on filtering arbitrary columns.
 - Dark mode support.
 
 ## 0.4.6
+
+- Add `max_height` to widget action props.
+- Add highlight search results to widget action results.
+- Add copy to clipboard to widget action results.
+- Add expand results modal to widget action results.
+- Add `menu_section` to model admins.
+
+## 0.4.5
+
+- Add `parent` argument to widget action props.
+- Add wraps to decorator to keep the original function name and docstring.
+- Add `pre_generate_models_schema` method to ModelAdmin to pre-generate models schema.
+- Fix examples.
+
+## 0.4.4
+
+- Replace helmet to update title and description.
+- Improve frontend coverage.
+
+## 0.4.3
+
+- Add `series` field to widget action props. Fix examples.
+- Add search by actions.
+
+## 0.4.2
+
+- Replace `DashboardWidgetAdmin` with `widget_action` decorator (no backward compatibility).
+- Fix mobile view.
+
+## 0.4.1
+
+- Fix upload file functionality. Fix examples.
+
