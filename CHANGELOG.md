@@ -270,3 +270,33 @@ and set `list_filter`/`fields` where you relied on filtering arbitrary columns.
 
 - Fix upload file functionality. Fix examples.
 
+## 0.4.0
+
+- Add new upload file functionality (without backward compatibility). See documentation for details.
+- Add example for Flask with SQLAlchemy.
+- Removed `ADMIN_DISABLE_CROP_IMAGE` setting. Use `disableCropImage` prop in UploadImage widget instead.
+
+## 0.3.11
+
+- Fix API service errors.
+
+## 0.3.10
+
+- Fix file download issue for actions.
+
+## 0.3.9
+
+- Add response types for actions.
+- Fix Decimal fields handling.
+
+## 0.3.8
+
+- Fix inline add/change issue.
+- Fix inline filter reset issue.
+
+## 0.3.7
+
+- Fix filter reset issue.
+- Fix date/time handling in transform helpers.
+- Fix examples.
+- Fix JSON textarea handling.
