@@ -300,3 +300,33 @@ and set `list_filter`/`fields` where you relied on filtering arbitrary columns.
 - Fix date/time handling in transform helpers.
 - Fix examples.
 - Fix JSON textarea handling.
+
+## 0.3.6
+
+- Fix datetime/time handling in transform helpers.
+- Revert `get_orm_list` method to original implementation. We can use `list_select_related` and `search_fields` for `prefetch_related_fields` and `additional_search_fields`.
+
+## 0.3.5
+
+- Enhance `get_orm_list` method to support `prefetch_related_fields` and `additional_search_fields`.
+- Add request/user context on `BaseModelAdmin` for per-request custom logic.
+
+## 0.3.4
+
+- Fix sort by and search by relations. Fix examples.
+
+## 0.3.3
+
+- Fix `DetachedInstanceError` when session is closed after commit.
+- Fix list display widths.
+- Fix Flask issues.
+
+## 0.3.2
+
+- Add `formfield_overrides` example. Add `label` and `help` props.
+
+## 0.3.1
+
+- Fix SQLAlchemy required fields. Fix CI.
+
+## 0.3.0
