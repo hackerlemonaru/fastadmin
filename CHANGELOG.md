@@ -352,3 +352,36 @@ and set `list_filter`/`fields` where you relied on filtering arbitrary columns.
 ## 0.2.18
 
 - Fix M2M/FK handling for SQLAlchemy with PostgreSQL (convert str to int).
+
+## 0.2.17
+
+- Fix FK handling for SQLAlchemy with PostgreSQL (convert str to int).
+
+## 0.2.16
+
+- Add `ADMIN_DISABLE_CROP_IMAGE` setting to configure image cropping on upload.
+
+## 0.2.15
+
+- Fix password logic for user model.
+
+## 0.2.14
+
+- Make permission functions awaitable. Bump frontend and backend packages.
+
+## 0.2.13
+
+- Fix edit page frontend issue for Date field.
+
+## 0.2.12
+
+- Remove python-dotenv dependency. Bump Django. Add Django example.
+
+## 0.2.11
+
+- Fix examples. Fix Pony ORM (delete, update M2M). Allow sorting by custom columns. Fix `list_display` ordering.
+
+## 0.2.10
+
+- Fix empty M2M issue. Optimize unit tests. Fix Pony ORM. Optimize Tortoise ORM search.
+
