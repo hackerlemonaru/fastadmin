@@ -34,3 +34,21 @@ test:
 
 cov: test
 
+# --- Documentation (MkDocs Material) -----------------------------------------
+# Build the static site into ./site. Social cards are generated only in CI
+# (the docs workflow installs the Cairo system libraries they need).
+docs:
+	uv run --group docs mkdocs build --strict
+
+# Live-preview at http://127.0.0.1:8000 (social cards off for speed).
+docs-serve:
+	uv run --group docs mkdocs serve
+
+kill:
+	kill -9 $$(lsof -t -i:8090)
+	kill -9 $$(lsof -t -i:3030)
+
+clean:
+	find . -type d -name "__pycache__" -exec rm -rf {} + > /dev/null 2>&1 || true
+	find . -type f -name "*.pyc" -delete > /dev/null 2>&1 || true
+	rm -rf htmlcov .coverage coverage.xml dist site .cache
