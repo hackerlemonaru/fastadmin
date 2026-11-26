@@ -19,3 +19,18 @@ lint:
 	uv run ruff format --check $(LINT_PATHS)
 	uv run ty check fastadmin
 	make -C frontend lint
+
+format:
+	uv run ruff check --fix $(LINT_PATHS)
+	uv run ruff format $(LINT_PATHS)
+	make -C frontend fix
+
+# -n auto runs the suite in parallel via pytest-xdist. Each worker gets its own
+# SQLite file (Django/Pony) with a busy timeout, so there are no "database is
+# locked" failures.
+test:
+	uv run pytest -n auto --cov=fastadmin --cov-report=term-missing --cov-report=xml tests
+	make -C frontend test
+
+cov: test
+
