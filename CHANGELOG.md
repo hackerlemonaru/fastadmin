@@ -385,3 +385,27 @@ and set `list_filter`/`fields` where you relied on filtering arbitrary columns.
 
 - Fix empty M2M issue. Optimize unit tests. Fix Pony ORM. Optimize Tortoise ORM search.
 
+## 0.2.9
+
+- Fix modal inline dialogs. Fix M2M multiple select.
+
+## 0.2.8
+
+- Fix SQLAlchemy delete functionality. Add more examples.
+
+## 0.2.7
+
+- Fix helper functions. Add regex support.
+
+## 0.2.6
+
+- Add edit button for async select.
+
+## 0.2.5
+
+- Fix async select in inlines.
+
+## 0.2.4
+
+- Fix dashboard widgets and auto-register inlines.
+
