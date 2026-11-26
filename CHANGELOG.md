@@ -409,3 +409,18 @@ and set `list_filter`/`fields` where you relied on filtering arbitrary columns.
 
 - Fix dashboard widgets and auto-register inlines.
 
+## 0.2.3
+
+- Fix filter issue on list views. Remove Jinja from dependencies.
+
+## 0.2.2
+
+- Fix datetime-related bugs.
+
+## 0.2.1
+
+- Update packages. Fix linters and tests in Vite frontend. Remove Pydantic from dependencies.
+
+## 0.2.0
+
+- Update packages. Use Vite instead of deprecated react-scripts.
