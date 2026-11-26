@@ -330,3 +330,25 @@ and set `list_filter`/`fields` where you relied on filtering arbitrary columns.
 - Fix SQLAlchemy required fields. Fix CI.
 
 ## 0.3.0
+
+- Clean up documentation. Update dependencies. Fix linters and tests. Frontend refactoring.
+
+## 0.2.22
+
+- Fix upload base64 widget; add `disableCropImage` prop. Fix examples.
+
+## 0.2.21
+
+- Fix cleaning of async select fields on forms.
+
+## 0.2.20
+
+- Fix `_id` fields handling. Bump backend and frontend packages.
+
+## 0.2.19
+
+- Fix `is_pk` for Tortoise ORM.
+
+## 0.2.18
+
+- Fix M2M/FK handling for SQLAlchemy with PostgreSQL (convert str to int).
