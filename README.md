@@ -93,3 +93,24 @@ class UserAdmin(TortoiseModelAdmin):
     list_display_links = ("id", "username")
     list_filter = ("id", "username", "is_superuser", "is_active")
     search_fields = ("username",)
+
+    async def authenticate(self, username: str, password: str) -> int | None:
+        user = await User.filter(username=username, is_superuser=True).first()
+        if not user:
+            return None
+        if not bcrypt.checkpw(password.encode(), user.hash_password.encode()):
+            return None
+        return user.id
+
+    async def change_password(self, id: int, password: str) -> None:
+        user = await User.filter(id=id).first()
+        if not user:
+            return
+        user.hash_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+        await user.save(update_fields=("hash_password",))
+
+
+app = FastAPI()
+app.mount("/admin", admin_app)
+```
+
