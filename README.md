@@ -58,3 +58,38 @@ pip install fastadmin[fastapi,django]        # FastAPI with Django ORM
 pip install fastadmin[fastapi,tortoise-orm]  # FastAPI with Tortoise ORM
 pip install fastadmin[fastapi,pony]          # FastAPI with Pony ORM
 pip install fastadmin[fastapi,sqlalchemy]    # FastAPI with SQLAlchemy (includes greenlet)
+pip install fastadmin[fastapi,yara-orm]      # FastAPI with Yara ORM
+pip install fastadmin[django]                # Django with Django ORM
+pip install fastadmin[django,pony]           # Django with Pony ORM
+pip install fastadmin[flask,sqlalchemy]      # Flask with SQLAlchemy (includes greenlet)
+```
+
+> **Note:** on zsh (the default macOS shell) quote the extras: `pip install 'fastadmin[fastapi,django]'`.
+
+Configure the required settings:
+
+```bash
+export ADMIN_USER_MODEL=User
+export ADMIN_USER_MODEL_USERNAME_FIELD=username
+export ADMIN_SECRET_KEY=secret_key
+```
+
+## Quick start
+
+```python
+import bcrypt
+from fastapi import FastAPI
+
+from fastadmin import TortoiseModelAdmin, register
+from fastadmin import fastapi_app as admin_app
+
+from models import User
+
+
+@register(User)
+class UserAdmin(TortoiseModelAdmin):
+    exclude = ("hash_password",)
+    list_display = ("id", "username", "is_superuser", "is_active")
+    list_display_links = ("id", "username")
+    list_filter = ("id", "username", "is_superuser", "is_active")
+    search_fields = ("username",)
