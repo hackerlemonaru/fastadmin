@@ -26,3 +26,35 @@ already know FastAdmin.
 ![FastAdmin demo — admin panel for FastAPI, Flask and Django](https://raw.githubusercontent.com/vsdudakov/fastadmin/main/docs/assets/images/demo.gif)
 
 ## Features
+
+- **Familiar Django-Admin-style API** — `list_display`, `list_filter`,
+  `search_fields`, `fieldsets`, `readonly_fields`, inlines, actions and more.
+- **Any web framework** — mount as a FastAPI sub-app, a Flask blueprint or
+  Django urlpatterns.
+- **Any ORM** — first-class admin classes for Tortoise ORM, Django ORM,
+  SQLAlchemy (async), Pony ORM and [Yara ORM](https://github.com/vsdudakov/yara-orm)
+  (a fast, Rust-engine async ORM).
+- **Authentication & permissions** — pluggable sign-in against your own user
+  model, per-action permission hooks, request/user context in every admin method.
+- **Rich form widgets** — 20+ antd-based widgets (rich text, JSON, async
+  select, phone, slug, date/time pickers, switches, radio groups, …) via
+  `formfield_overrides`.
+- **File & image uploads** — storage-agnostic `upload_file` hook and
+  presigned-URL support via `get_file_url` (local disk, S3, …).
+- **Dashboard widgets** — declarative line/area/column/bar/pie charts and
+  action widgets with filters, powered by antd charts.
+- **Bulk actions & export** — custom bulk actions, CSV/JSON export.
+- **Quality** — fully typed and linted (ruff + ty), 100% backend test coverage,
+  modern React (Vite + antd) frontend bundled with the package — no Node.js
+  needed at install time.
+
+## Installation
+
+Install with the extras matching your web framework and ORM (each combination
+works standalone):
+
+```bash
+pip install fastadmin[fastapi,django]        # FastAPI with Django ORM
+pip install fastadmin[fastapi,tortoise-orm]  # FastAPI with Tortoise ORM
+pip install fastadmin[fastapi,pony]          # FastAPI with Pony ORM
+pip install fastadmin[fastapi,sqlalchemy]    # FastAPI with SQLAlchemy (includes greenlet)
