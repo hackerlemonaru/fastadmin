@@ -114,3 +114,23 @@ app = FastAPI()
 app.mount("/admin", admin_app)
 ```
 
+Run `uvicorn example:app` and open `http://localhost:8000/admin`.
+
+Mounting for the other frameworks:
+
+```python
+# Flask
+from fastadmin import flask_app as admin_app
+app.register_blueprint(admin_app, url_prefix="/admin")
+
+# Django (urls.py)
+from fastadmin import get_django_admin_urls as get_admin_urls
+urlpatterns = [path("admin/", get_admin_urls())]
+```
+
+## Documentation
+
+Full documentation lives at
+**[vsdudakov.github.io/fastadmin](https://vsdudakov.github.io/fastadmin/)**:
+
+- [Installation](https://vsdudakov.github.io/fastadmin/getting-started/installation/)
